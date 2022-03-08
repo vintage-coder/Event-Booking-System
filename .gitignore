@@ -1,0 +1,11 @@
+
+
+# Ignoring bin folder
+
+/EventBookingSystem/bin
+
+/EventBookingSystem/obj
+
+
+/EventBookingSystem/ClientApp/node_modules
+
