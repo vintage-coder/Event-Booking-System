@@ -1,0 +1,45 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>Event Booking System</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/event'"> Home </a>
+        <a mat-button [routerLink]=""> About Us </a>
+        <a mat-button [routerLink]=""> Contact Us </a>        
+        <a mat-button [routerLink]=""> Sign In </a>
+        <a mat-raised-button color="accent" [routerLink]=""> Register </a>
+  
+      </div>
+    </mat-toolbar-row>
+  
+    <mat-toolbar-row>
+        <span style="font-size: 12px;">Book Your Events without any hassels</span>
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+  
+        <a mat-button [routerLink]=""> Home </a>
+        <a mat-button [routerLink]=""> About Us </a>
+        <a mat-button [routerLink]=""> Contact Us </a>        
+        <a mat-button [routerLink]=""> Sign In </a>
+        <a mat-raised-button color="accent" [routerLink]=""> Register </a>
+        <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">
+  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

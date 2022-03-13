@@ -1,0 +1,16 @@
+[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "studentEmail": "johndoe@example.com",
+      "course": "Bsc Software Engineering",
+      "yearOfStudy": 2
+    },
+    {
+      "firstName": "Test2",
+      "lastName": "Test2",
+      "studentEmail": "test@example.com",
+      "course": "Bsc Computer Science",
+      "yearOfStudy": 4
+    }
+  ]

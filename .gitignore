@@ -1,11 +1,36 @@
 
 
-# Ignoring bin folder
+# Ignoring files and folders in the ASP.NET Core Web API
 
-/EventBookingSystem/bin
+/EBSystemBackEnd/EBSystem.API/bin
+/EBSystemBackEnd/EBSystem.API/obj
 
-/EventBookingSystem/obj
+
+/EBSystemBackEnd/EBSystem.Models/bin
+/EBSystemBackEnd/EBSystem.Models/obj
 
 
-/EventBookingSystem/ClientApp/node_modules
+/EBSystemBackEnd/EBSystem.Services/bin
+/EBSystemBackEnd/EBSystem.Services/obj
+
+
+/EBSystemBackEnd/EBSystem.Test/bin
+/EBSystemBackEnd/EBSystem.Test/obj
+
+
+# Ignoring files and folders in the Angular Project
+
+
+/EBSystemUI/node_modules
+/EBSystemUI/e2e
+
+
+
+
+
+
+# Ignoring file extensions
+
+*.vs
+
 
