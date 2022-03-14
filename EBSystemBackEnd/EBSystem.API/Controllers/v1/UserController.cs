@@ -2,10 +2,11 @@
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace EBSystem.API.Controllers
+namespace EBSystem.API.Controllers.v1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("ebs/v{version:apiVersion}/[controller]")]
     public class UserController : ControllerBase
     {
         // GET: api/<UserController>

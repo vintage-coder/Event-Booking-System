@@ -4,11 +4,13 @@ using System.Net.Http;
 using EBSystem.Services.Contracts;
 using EBSystem.Models.Models;
 
-namespace EBSystem.API.Controllers
+namespace EBSystem.API.Controllers.v2
 {
 
-    [Route("ebs/[controller]")]
+    
     [ApiController]
+    [ApiVersion("2.0")]
+    [Route("ebs/v{version:apiVersion}/[controller]")]
     public class EventController : ControllerBase
     {
         private readonly IEventService _eventService;
