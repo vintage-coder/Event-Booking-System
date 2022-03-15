@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using EBSystem.Services.Contracts;
 using EBSystem.Models.Models;
+using EBSystem.Models.DBContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace EBSystem.API.Controllers.v2
-{
-
-    
+{   
     [ApiController]
     [ApiVersion("2.0")]
     [Route("ebs/v{version:apiVersion}/[controller]")]
@@ -15,10 +15,11 @@ namespace EBSystem.API.Controllers.v2
     {
         private readonly IEventService _eventService;
 
-
-        public EventController(IEventService eventService)
+        private readonly EMSDBContext _eMSDBContext;
+        public EventController(IEventService eventService ,EMSDBContext eMSDBContext)
         {
             _eventService = eventService;
+            _eMSDBContext = eMSDBContext;
 
         }
 
@@ -47,7 +48,13 @@ namespace EBSystem.API.Controllers.v2
         {
             try
             {
-                var result = await _eventService.GetEvent(id);
+                //var result = await _eventService.GetEvent(id);
+
+                var result= await _eMSDBContext.EventTbls.FirstOrDefaultAsync(e => e.EventId == id);
+
+                //_eMSDBContext.Entry(result)
+                //    .Reference(usr => usr.Event)
+                //    .Load();
 
                 if (result == null)
                 {

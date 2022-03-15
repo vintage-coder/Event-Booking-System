@@ -39,7 +39,7 @@ namespace EBSystem.Services.Services
         {
             var result= await eMSDBContext.EventTbls.FirstOrDefaultAsync(e => e.EventId == id);
 
-            if(result!=null)
+            if (result!=null)
             {
                 return result;
             }

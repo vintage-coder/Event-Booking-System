@@ -17,7 +17,7 @@ namespace EBSystem.Models.Models
         [Required]
         public string? PromoCode { get; set; }
 
-        public virtual EventCategoryTbl Event { get; set; } = null!;
+        public virtual EventCategoryTbl Event { get; set; }
         public virtual TicketCategoryTbl? TicketCategory { get; set; }
     }
 }

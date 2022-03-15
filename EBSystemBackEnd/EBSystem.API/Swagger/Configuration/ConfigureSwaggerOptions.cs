@@ -59,7 +59,7 @@ namespace EBSystem.API.Swagger.Configuration
                 var info = new OpenApiInfo
                 {
                     Version = "v2",
-                    Title = "EB System API v1",
+                    Title = "EB System API v2",
                     Description = "A simple example for EB System v2 swagger api information",
                     TermsOfService = new Uri("http://tempuri.org/terms"),
                     Contact = new OpenApiContact
