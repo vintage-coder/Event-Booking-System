@@ -14,8 +14,8 @@
 /EBSystemBackEnd/EBSystem.Services/obj
 
 
-/EBSystemBackEnd/EBSystem.Test/bin
-/EBSystemBackEnd/EBSystem.Test/obj
+/EBSystemBackEnd/EBSystem.Tests/bin
+/EBSystemBackEnd/EBSystem.Tests/obj
 
 
 # Ignoring files and folders in the Angular Project
@@ -23,6 +23,7 @@
 
 /EBSystemUI/node_modules
 /EBSystemUI/e2e
+/EBSystemUI/dist
 
 
 
