@@ -1,0 +1,15 @@
+.container
+{
+    margin-top: 50px;
+}
+
+.example-card
+{
+    width: 500px;
+    height: 550px;
+}
+
+mat-card-actions button:hover
+{
+    background-color: chocolate;
+}

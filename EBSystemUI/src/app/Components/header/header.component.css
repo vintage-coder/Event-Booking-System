@@ -1,0 +1,28 @@
+mat-toolbar mat-toolbar-row#matrow2
+{
+    background-color: #1b2536;
+    color: whitesmoke;
+}
+
+mat-toolbar mat-toolbar-row#matrow1
+{
+    background-color: #032152;
+    color: whitesmoke;
+}
+
+mat-toolbar mat-toolbar-row h1
+{
+    font-size: 30px;    
+}
+
+mat-toolbar mat-toolbar-row div
+{
+    float: left;
+}
+
+mat-toolbar mat-toolbar-row div a
+{    
+    text-decoration-line: none;
+    
+}
+

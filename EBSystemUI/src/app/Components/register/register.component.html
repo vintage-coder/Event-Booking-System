@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 mx-auto">
+          <div class="card">
+              <div class="card-header">
+                  <h3> Registeration </h3>
+              </div>
+              <div class="card-body">
+                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                      <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" formControlName="name" placeholder="Enter the Name">
+                          
+                      </div>
+                      <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" class="form-control" formControlName="email" placeholder="Enter the Email">                               
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" class="form-control" formControlName="username" placeholder="Enter the User Name">
+                       
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" formControlName="password" placeholder="Enter the Password">
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm the Password">            
+                    </div>
+                      
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-success">Register</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+  <div class="row">
+      <div class="col-md-8 mx-auto">
+          <div class="card">
+              <div class="card-header">
+                  <h3>Angular Reactive Form</h3>
+              </div>
+              <div class="card-body">
+                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                      <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" formControlName="name">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                              Name is required
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" class="form-control" formControlName="email">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                              Email is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.email">
+                              Enter a valid email address
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>User Name</label>
+                          <input type="text" class="form-control" formControlName="username">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                              User Name is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.userNameNotAvailable">
+                              User Name is not available
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Password</label>
+                          <input type="password" class="form-control" formControlName="password">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                              Password is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                              Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                              letter and 1 number
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Confirm Password</label>
+                          <input type="password" class="form-control" formControlName="confirmPassword">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                              Confirm Password is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                              Passwords doesnot match
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-success">Register</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header>
+  
+      <form class="example-form">
+  
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <mat-label>Choose designation</mat-label>
+            <mat-select>
+              <mat-option [value]="user" *ngFor="let user of User">{{user}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+        </mat-card-content>
+  
+        <button mat-stroked-button color="accent" class="btn-block">Register</button>
+  
+      </form>
+    </mat-card>
+  </div> --> -->
