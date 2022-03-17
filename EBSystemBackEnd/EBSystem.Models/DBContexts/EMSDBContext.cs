@@ -10,7 +10,6 @@ namespace EBSystem.Models.DBContexts
     {
         public EMSDBContext()
         {
-
         }
 
         public EMSDBContext(DbContextOptions<EMSDBContext> options)
@@ -24,14 +23,14 @@ namespace EBSystem.Models.DBContexts
         public virtual DbSet<TicketCategoryTbl> TicketCategoryTbls { get; set; } = null!;
         public virtual DbSet<UserTbl> UserTbls { get; set; } = null!;
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("Server=GOWTHAM-T48OBM8\\SQLEXPRESS;Initial Catalog=EMSDB;Integrated Security=True;");
-
-        //    }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=GOWTHAM-T48OBM8\\SQLEXPRESS;Initial Catalog=EMSDB;Integrated Security=True;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,9 +54,7 @@ namespace EBSystem.Models.DBContexts
 
                 entity.ToTable("EventTbl", "Master");
 
-                entity.Property(e => e.EventId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("Event_ID");
+                entity.Property(e => e.EventId).HasColumnName("Event_ID");
 
                 entity.Property(e => e.EndDate)
                     .HasColumnType("datetime")
@@ -83,16 +80,15 @@ namespace EBSystem.Models.DBContexts
 
                 entity.Property(e => e.TicketCategoryId).HasColumnName("Ticket_Category_ID");
 
-                entity.HasOne(d => d.Event)
-                    .WithOne(p => p.EventTbl)
-                    .HasForeignKey<EventTbl>(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventTbl_Event_Category");
+                entity.HasOne(d => d.EventCategory)
+                    .WithMany(p => p.EventTbls)
+                    .HasForeignKey(d => d.EventCategoryId)
+                    .HasConstraintName("FK_Event_CategoryId");
 
                 entity.HasOne(d => d.TicketCategory)
                     .WithMany(p => p.EventTbls)
                     .HasForeignKey(d => d.TicketCategoryId)
-                    .HasConstraintName("FK_EventTbl_Ticket_Category");
+                    .HasConstraintName("FK_Event_TicketCategoryId");
             });
 
             modelBuilder.Entity<PaymentTypeTbl>(entity =>

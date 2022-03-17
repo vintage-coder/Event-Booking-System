@@ -49,7 +49,8 @@ namespace EBSystem.Services.Services
 
         public async Task<IEnumerable<EventTbl>> GetEvents()
         {
-            return await eMSDBContext.EventTbls.ToListAsync();
+            return await eMSDBContext.EventTbls.Include(e => e.EventCategory)
+                .Include(e=> e.TicketCategory).ToListAsync();
         }
 
         public async Task<EventTbl> UpdateEvent(EventTbl eventTbl)
