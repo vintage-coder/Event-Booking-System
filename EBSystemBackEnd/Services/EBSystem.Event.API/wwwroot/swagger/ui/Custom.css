@@ -1,0 +1,25 @@
+﻿.swagger-ui .topbar {
+    background-color: darkblue;
+    border-bottom: 3px solid black;
+}
+
+.topbar-wrapper img[alt="Swagger UI"], .topbar-wrapper span {
+    visibility: hidden;
+}
+
+.topbar-wrapper .link:after {
+    content: 'EBS Event Service API';
+    color: #fff;
+    visibility: visible;
+    display: block;
+    position: absolute;
+    padding: 15px;
+}
+
+.swagger-ui .topbar .download-url-wrapper .select-label select {
+    border-color: brown;
+}
+
+.swagger-ui .info .title small:last-child {
+    background-color: red !important;
+}

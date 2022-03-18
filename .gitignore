@@ -18,6 +18,26 @@
 /EBSystemBackEnd/EBSystem.Tests/obj
 
 
+# Ignoring microservice project structued object and binary
+
+/EBSystemBackEnd/Tests/EBSystem.API.Tests/bin
+/EBSystemBackEnd/Tests/EBSystem.API.Tests/obj
+
+
+
+/EBSystemBackEnd/Services/EBSystem.Event.API/bin
+/EBSystemBackEnd/Services/EBSystem.Event.API/obj
+
+/EBSystemBackEnd/Services/EBSystem.Order.API/bin
+/EBSystemBackEnd/Services/EBSystem.Order.API/obj
+
+/EBSystemBackEnd/Services/EBSystem.User.API/bin
+/EBSystemBackEnd/Services/EBSystem.User.API/obj
+
+
+/EBSystemBackEnd/ApiGateway/APIGateWays/bin
+/EBSystemBackEnd/ApiGateway/APIGateWays/obj
+
 # Ignoring files and folders in the Angular Project
 
 

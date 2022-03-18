@@ -1,0 +1,40 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/ebs/v2/event",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "18708"
+        }
+      ],
+      "UpstreamPathTemplate": "/getEvent",
+      "Key": "Event"
+    },
+    {
+      "DownstreamPathTemplate": "/ebs/v2/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost", //http://localhost:19158/
+          "Port": "19158"
+        }
+      ],
+      "UpstreamPathTemplate": "/getUser",
+      "Key": "User"
+    }
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "Event",
+        "User"
+      ],
+      "UpstreamPathTemplate": "/EventAndUser"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:11923/"
+  }
+}
