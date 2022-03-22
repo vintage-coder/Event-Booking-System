@@ -1,12 +1,21 @@
+using EBSystem.Authentication.API.Contracts;
+using EBSystem.Authentication.API.DBContexts;
+using EBSystem.Authentication.API.Repositories;
 using EBSystem.User.API.Swagger.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
+
+
 
 
 
@@ -21,6 +30,32 @@ builder.Services.AddCors(options =>
     });
 });
 
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "http://localhost:57589",
+            ValidAudience = "http://localhost:57589",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("gowthamSecretKey@345"))
+        };
+    });
+
+
+
+
+builder.Services.AddDbContext<AuthenticateContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Authentication")));
+
+
 builder.Services.AddEndpointsApiExplorer();
 
 
@@ -29,7 +64,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
 
-
+builder.Services.AddTransient<ITokenRepository, TokenRepository>();
 
 
 builder.Services.AddApiVersioning(options =>
@@ -96,6 +131,8 @@ app.UseSwaggerUI(c =>
 
 
 app.UseStaticFiles();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
