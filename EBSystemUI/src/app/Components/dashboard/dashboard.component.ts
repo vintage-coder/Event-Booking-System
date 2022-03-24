@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
  logOut()
   {
     localStorage.removeItem("webToken");
+    this.router.navigate(["login"]);
   }
 
 }

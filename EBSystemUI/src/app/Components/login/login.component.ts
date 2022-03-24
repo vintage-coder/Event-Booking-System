@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
   submitted = false;
+  showError:boolean;
+  
 
   constructor(private fb:FormBuilder, private customValidator:CustomValidationService,
      private http:HttpClient,
@@ -55,64 +57,25 @@ export class LoginComponent implements OnInit {
         console.log("confirm password : "+this.loginForm.value.confirmPassword);
         console.table(this.loginForm.value);
 
-        //const credentials = JSON.stringify({ "username": this.loginForm.value.name, "password": this.loginForm.value.password })
-        const credentials = JSON.stringify({ "username": "gowtham", "password": "gowtham@123" })
+        const credentials = JSON.stringify({ "username": this.loginForm.value.name, "password": this.loginForm.value.password })
+       
         this.authenticationService.getWebToken(credentials);
       }
 
      
     }
 
+
+    externalLogin()
+    {
+      console.log("External login was called ......");
+ 
+    }
+
+
   }
-
-
-
-
-
   
 
-    //const credentials = JSON.stringify({ "username": this.loginForm.value.name, "password": this.loginForm.value.password })
-
-    //     const credentials = JSON.stringify({ "username": "gowtham", "password": "gowtham@123" })
-
-
-    //     this.http.post("http://localhost:57589/ebs/v1/auth/login", credentials, {
-    //   headers: new HttpHeaders({
-    //     "Content-Type": "application/json"
-    //   })
-    // }).subscribe(response => {
-    //   const token = (<any>response).token;
-    //   localStorage.setItem("webToken", token);
-    
-    //   this.router.navigate(["/dashboard"]);
-    // }, err => {
-    //   console.log("Error message : not able to get jwt token");
-    // });
-        
-
-
-
-  // invalidLogin:boolean;
-  // constructor(private http:HttpClient, private router:Router) { }
-
-  // ngOnInit(): void {
-  // }
-
-  // login(form: NgForm) {
-  //   const credentials = JSON.stringify(form.value);
-  //   this.http.post("http://localhost:57589/ebs/v1/auth/login", credentials, {
-  //     headers: new HttpHeaders({
-  //       "Content-Type": "application/json"
-  //     })
-  //   }).subscribe(response => {
-  //     const token = (<any>response).token;
-  //     localStorage.setItem("jwt", token);
-  //     this.invalidLogin = false;
-  //     this.router.navigate(["/dashboard"]);
-  //   }, err => {
-  //     this.invalidLogin = true;
-  //   });
-  // }
 
 
 

@@ -20,6 +20,8 @@ import { AdminPageComponent } from './Components/admin-page/admin-page.component
 import { UserPageComponent } from './Components/user-page/user-page.component';
 import { HomeComponent } from './Components/home/home.component';
 
+
+
 export function tokenGetter() {
   return localStorage.getItem("webToken");
 }
@@ -62,7 +64,12 @@ export function tokenGetter() {
 
   ],
   
-  providers: [AuthGuardGuard],
+  providers: [
+    AuthGuardGuard,
+    
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

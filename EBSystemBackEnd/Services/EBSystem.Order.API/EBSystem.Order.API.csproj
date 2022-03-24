@@ -24,4 +24,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DBContexts\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Mapper\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
