@@ -19,13 +19,15 @@ import { AuthGuardGuard } from './Guards/auth-guard.guard';
 import { AdminPageComponent } from './Components/admin-page/admin-page.component';
 import { UserPageComponent } from './Components/user-page/user-page.component';
 import { HomeComponent } from './Components/home/home.component';
+import {GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
+
+
 
 
 
 export function tokenGetter() {
   return localStorage.getItem("webToken");
 }
-
 
 
 @NgModule({
@@ -51,7 +53,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-   
+    SocialLoginModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     
     JwtModule.forRoot({
@@ -66,9 +68,18 @@ export function tokenGetter() {
   
   providers: [
     AuthGuardGuard,
-    
-
-
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('473645421288-192r2fjahgshbp2s4isqta4m59jrlp3j.apps.googleusercontent.com')
+          }
+        ]
+      }
+    },
   ],
   bootstrap: [AppComponent]
 })

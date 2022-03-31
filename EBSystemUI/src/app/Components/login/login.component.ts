@@ -5,7 +5,12 @@ import {Route, Router} from '@angular/router';
 import {NgForm}  from '@angular/forms';
 import {CustomValidationService} from './../../Services/custom-validation.service';
 import {AuthenticationService} from './../../Services/authentication.service';
+import {GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
+import {ExternalAuthDto} from './../../Models/ExternalAuthDto'
 
+// import { SocialAuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+// import { GoogleLoginProvider } from "angularx-social-login";
 
 
 
@@ -20,10 +25,12 @@ export class LoginComponent implements OnInit {
   submitted = false;
   showError:boolean;
   
-
+  public user: SocialUser = new SocialUser;
   constructor(private fb:FormBuilder, private customValidator:CustomValidationService,
      private http:HttpClient,
-     private router:Router,private authenticationService:AuthenticationService) {
+     private router:Router,private authenticationService:AuthenticationService,
+     private socialAuthService: SocialAuthService
+     ) {
    
   }
 
@@ -38,6 +45,12 @@ export class LoginComponent implements OnInit {
       validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
     }
     );
+
+
+    this.socialAuthService.authState.subscribe(user => {
+      this.user = user;
+      console.log(user);
+    });
   }
 
   get loginFormControl() {
@@ -69,8 +82,44 @@ export class LoginComponent implements OnInit {
     externalLogin()
     {
       console.log("External login was called ......");
+
+      //this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+
+      this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+
+      .then(res =>{
+          const user:SocialUser={...res};
+          console.log(user);
+
+          const externalAuth: ExternalAuthDto = {
+            provider: user.provider,
+            idToken: user.idToken
+          }
+
+          console.log('idToken: ' + user.idToken);
+
+      },error =>{
+            console.log(error);
+      });
  
     }
+
+    
+    // private validateExternalAuth(externalAuth: ExternalAuthDto) {
+    //   this._authService.externalLogin('api/v1/GoogleAuth/externallogin', externalAuth)
+    //     .subscribe(res => {
+    //       localStorage.setItem("token", res.token);
+    //       this._authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+    //       this._router.navigate([this._returnUrl]);
+    //     },
+    //     error => {
+    //       this.errorMessage = error;
+    //       this.showError = true;
+    //       this._authService.signOutExternal();
+    //     });
+    // }
+
+
 
 
   }

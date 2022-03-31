@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
-// import { SocialAuthService } from "angularx-social-login";
-// import { GoogleLoginProvider } from "angularx-social-login";
+
+
 
 
 
@@ -11,7 +11,8 @@ import {Router} from '@angular/router';
 })
 export class AuthenticationService {
 
-  constructor(private http:HttpClient, private router:Router
+ 
+  constructor(private http:HttpClient, private router:Router,
     ) { }
 
 
@@ -33,13 +34,5 @@ export class AuthenticationService {
   }
 
 
-  signInWithGoogle(){
-  
-  }
-
-  signOutExternal()  
-  {
-    
-  }
 
 }

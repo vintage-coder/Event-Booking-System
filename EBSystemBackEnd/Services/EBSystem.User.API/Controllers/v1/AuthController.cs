@@ -8,6 +8,9 @@ using EBSystem.Authentication.API.DBContexts;
 using EBSystem.Authentication.API.Contracts;
 using EBSystem.Authentication.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using EBSystem.Authentication.API.Models;
+using EBSystem.Authentication.API.Entities;
 
 namespace EBSystem.Authentication.API.Controllers.v1
 {
@@ -18,9 +21,17 @@ namespace EBSystem.Authentication.API.Controllers.v1
     {
         private readonly AuthenticateContext _authenticateContext;
         private readonly ITokenRepository _tokenRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
+             
 
-        public AuthController(ITokenRepository tokenRepository, AuthenticateContext authenticateContext)
+
+
+        public AuthController(ITokenRepository tokenRepository, AuthenticateContext authenticateContext,
+            IConfiguration configuration, UserManager<ApplicationUser> userManager )
         {
+            _userManager = userManager;
+            _configuration = configuration;
             _tokenRepository=tokenRepository;
             _authenticateContext=authenticateContext;
         }
@@ -69,7 +80,7 @@ namespace EBSystem.Authentication.API.Controllers.v1
             }
 
             string accessToken = tokenApi.AccessToken;
-            string refressToken = tokenApi.RefreshToken;
+            string refreshToken = tokenApi.RefreshToken;
 
             var principal = _tokenRepository.GetPrincipalFromExpiredToken(accessToken);
 
@@ -78,7 +89,7 @@ namespace EBSystem.Authentication.API.Controllers.v1
             var user = _authenticateContext.logins.SingleOrDefault(u => u.UserName == username);
 
 
-            if (user == null || user.RefreshToken != refressToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
             {
                 return BadRequest("Invalid Client Request");
             }
@@ -94,7 +105,7 @@ namespace EBSystem.Authentication.API.Controllers.v1
             return new OkObjectResult(new
             {
                 accessToken = newAccessToken,
-                refressToken = newRefreshToken
+                refreshToken = newRefreshToken
             });
 
         }
@@ -110,6 +121,38 @@ namespace EBSystem.Authentication.API.Controllers.v1
             user.RefreshToken = null;
             _authenticateContext.SaveChanges();
             return NoContent();
+        }
+
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] Register register)
+        {
+            var userExist = await _userManager.FindByNameAsync(register.UserName) ;
+
+            if(userExist!=null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Error", Message = "Error internal server" });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                SecurityStamp=Guid.NewGuid().ToString(),
+                UserName=register.UserName,
+            };
+
+
+            var result=await _userManager.CreateAsync(user,register.Password);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Error", Message = "User not created successfully" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "User not Created Successfully" });
+
         }
 
     }

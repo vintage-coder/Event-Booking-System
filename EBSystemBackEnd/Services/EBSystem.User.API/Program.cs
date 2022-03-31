@@ -1,5 +1,6 @@
 using EBSystem.Authentication.API.Contracts;
 using EBSystem.Authentication.API.DBContexts;
+using EBSystem.Authentication.API.Models;
 using EBSystem.Authentication.API.Repositories;
 using EBSystem.User.API.Swagger.Configuration;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
+using EBSystem.Authentication.API.Handlers;
+using EBSystem.Authentication.API.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,9 +40,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
     .AddJwtBearer(options =>
     {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -55,7 +61,7 @@ builder.Services.AddAuthentication(opt => {
 
 // ===========================Google Authentication Services=========================
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>();
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
@@ -75,10 +81,27 @@ builder.Services.AddDbContext<AuthenticateContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Authentication")));
 
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("Authentication")));
+
+
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
+
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
 
 builder.Services.AddTransient<ITokenRepository, TokenRepository>();
+
+
+builder.Services.AddTransient<GoogleHelper>();
+
+builder.Services.AddTransient<JWTHelper>();
+
+
 
 // ===============================Api Versioning Service==========================
 
