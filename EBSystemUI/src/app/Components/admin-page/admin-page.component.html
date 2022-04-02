@@ -1,1 +1,151 @@
-<p>admin-page works!</p>
+<div class="container">
+    <div class="row" id="row1">
+      <div class="col-md-6">
+          <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eventModal">Add New Event</a>
+      </div>
+      <div class="col-md-6">
+          <a class="btn btn-success">View All Orders</a>
+      </div>
+       
+        
+        <!-- <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#eventModal" type="submit">Add Event</button> -->
+    </div>
+
+   
+
+    <div class="row" id="row2">
+        <div class="mat-elevation-z8 table1">
+            <table mat-table [dataSource]="dataSource">
+          
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+          
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
+          
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons 
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
+          </div>
+
+    </div> 
+    
+    <!-- <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" 
+    aria-hidden="true" data-bs-backdrop="false">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+     -->
+
+</div>
+
+
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" 
+aria-hidden="true" data-bs-backdrop="false">
+  <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+
+      <form role="form" method="POST" action="">        
+          <div class="modal-header">
+            <p class="modal-title mt">Event Details</p>
+            <!-- <h5 class="modal-title" id="eventModalLabel">Event Details</h5> -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row row-t">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-md-4">
+                    <label class="control-label">Username</label>
+                  </div>
+                  
+                  <div class="col-md-8">
+                      <input type="text" class="form-control" name="name" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-md-4">
+                    <label class="control-label">Username</label>
+                  </div>
+                  
+                  <div class="col-md-8">
+                      <input type="text" class="form-control" name="name" value="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-t">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-md-4">
+                    <label class="control-label">Username</label>
+                  </div>
+                  
+                  <div class="col-md-8">
+                      <input type="text" class="form-control" name="name" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-md-4">
+                    <label class="control-label">Username</label>
+                  </div>
+                  
+                  <div class="col-md-8">
+                      <input type="text" class="form-control" name="name" value="">
+                  </div>
+                </div>
+              </div>
+            </div>
+                           
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success">Add</button>
+            </div>
+          </form>
+
+    </div>
+  </div>
+</div>
+
+

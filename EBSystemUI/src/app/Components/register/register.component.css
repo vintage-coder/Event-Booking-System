@@ -32,6 +32,24 @@ div.form-group label
     font-style: normal;
 }
 
+.form-group
+{
+    margin-bottom: 20px;
+}
+
+.form-group label
+{
+    margin-top: 10px;
+}
+
+.form-group input
+{
+    margin-top: 10px;
+    width: 500px;
+}
+
+
+
 button
 {
     float: right;

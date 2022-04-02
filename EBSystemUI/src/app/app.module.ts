@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
@@ -20,7 +20,10 @@ import { AdminPageComponent } from './Components/admin-page/admin-page.component
 import { UserPageComponent } from './Components/user-page/user-page.component';
 import { HomeComponent } from './Components/home/home.component';
 import {GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
-
+import { AddEventComponent } from './Components/add-event/add-event.component';
+import { SidenavListComponent } from './Components/navigation/sidenav-list/sidenav-list.component';
+import { CheckOutComponent } from './Components/check-out/check-out.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -43,7 +46,10 @@ export function tokenGetter() {
     CustomerComponent,
     AdminPageComponent,
     UserPageComponent,
-    HomeComponent
+    HomeComponent,
+    AddEventComponent,
+    SidenavListComponent,
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     SocialLoginModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-    
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {       
         tokenGetter: tokenGetter,

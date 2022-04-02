@@ -1,7 +1,21 @@
 
 
-<app-header></app-header>
+<app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav >
+      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>    
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-<router-outlet></router-outlet>
 
-<app-footer class="mt-auto" ></app-footer>
+
+<!-- <app-header></app-header>
+
+<router-outlet></router-outlet> -->
+
+<app-footer class="mt-auto foot" ></app-footer>

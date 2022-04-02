@@ -1,7 +1,32 @@
-
-.footer-area
+/* mat-toolbar-row
 {
-    height: 100px;
-    background-color:#032152;
+    height: 150px;
     color: whitesmoke;
+} */
+
+mat-toolbar .row1
+{
+    background-color: #032152;
+    margin-right: 0px;
+    padding: 0px;
+    height: 150px;   
 }
+
+a {
+    color: white;
+}
+
+mat-toolbar .row2
+{
+    background-color: #032152;
+    margin-right: 0px;
+    padding: 0px;
+}
+
+.row2 p
+{
+    color: whitesmoke;
+    text-align: center;
+    margin-left: 450px;
+}
+

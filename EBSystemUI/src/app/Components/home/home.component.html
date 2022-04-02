@@ -1,7 +1,32 @@
-<div class="container" *ngFor="let event of eventlist">
+<div class="container">
+  <mat-card class="event-card" *ngFor="let event of eventlist">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
+      <mat-card-title>{{event}}</mat-card-title>
+      <mat-card-subtitle>Singing Competition</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="./../../../assets/Images/event3.jpeg" alt="Event Photo">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>More</button>
+      <button mat-button>Book Now</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+
+
+
+<!-- <div class="container">
     <div class="row">
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <mat-card class="example-card">
+        <div class="col">
+            <mat-card class="example-card" *ngFor="let event of eventlist">
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"></div>
                   <mat-card-title>{{event}}</mat-card-title>
@@ -22,4 +47,4 @@
               </mat-card>
         </div>
     </div>    
-</div>
+</div> -->

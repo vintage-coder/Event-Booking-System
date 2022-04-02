@@ -1,8 +1,4 @@
-mat-toolbar mat-toolbar-row#matrow2
-{
-    background-color: #1b2536;
-    color: whitesmoke;
-}
+
 
 mat-toolbar mat-toolbar-row#matrow1
 {
@@ -25,4 +21,19 @@ mat-toolbar mat-toolbar-row div a
     text-decoration-line: none;
     
 }
+ 
+mat-toolbar mat-toolbar-row h1
+{
+    margin-left: 30px;
+}
 
+#items
+{
+    margin-left: 400px;
+    
+}
+
+#items a
+{
+    font-size: 18px;
+}

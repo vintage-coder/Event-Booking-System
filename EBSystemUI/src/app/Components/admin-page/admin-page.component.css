@@ -1,0 +1,95 @@
+.container
+{
+    margin-bottom:auto;    
+    margin-left: 200px;    
+}
+
+
+#row1
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#row1 a
+{
+    margin-left: 50px;
+}
+
+#row2
+{
+    margin-bottom: 50px;
+
+}
+
+
+
+
+table {
+    width: 100%;
+    
+  }
+
+  table th
+  {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      font-weight: bolder;
+      color: brown;
+  }
+
+  .table1
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bolder;
+    margin-left: 0px;
+  }
+
+  .mat-header-row
+  {
+      background-color: darkcyan;  
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: large;
+      font-weight: bolder;
+  }
+
+ .modal-title
+  {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 22px;
+      font-weight: bolder;
+      margin-bottom: 5px;
+      /* background-color: #032152;   */
+  }
+
+  .modal-header
+  {
+    background-color: #6d08e0;
+    color: whitesmoke;
+  }
+
+
+  .row-t
+  {
+      margin-top: 10px;
+  }
+
+.control-label
+{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+  /* .input-w
+  {
+    float: none; 
+    display: inline-block;
+    vertical-align: middle;   
+  } */
+
+

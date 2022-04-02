@@ -1,22 +1,24 @@
-
 <mat-toolbar>
     <mat-toolbar-row id="matrow1">
       
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+      </div>
       <h1>Event Booking System</h1>
       
 
       <div id="items">
-        <a mat-button routerLink="" routerLinkActive="active"> Home </a>
-        <a mat-button routerLink=""> About Us </a>
-        <a mat-button routerLink=""> Contact Us </a>        
+        <a mat-button routerLink="home" routerLinkActive="active"> Home </a>
+        <a mat-button routerLink="admin"> About Us </a>
+        <a mat-button routerLink="addevent"> Contact Us </a>        
         <a mat-button routerLink="login"> Sign In </a>
         <a mat-raised-button color="accent" routerLink="register"> Register </a>
   
+        
       </div>
     </mat-toolbar-row>
   
-    <!-- <mat-toolbar-row id="matrow2">
-        <span style="font-size: 12px;">Book Your Events without any hassels</span>
-      </mat-toolbar-row> -->
   </mat-toolbar>
 

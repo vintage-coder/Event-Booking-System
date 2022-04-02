@@ -35,8 +35,43 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
-
 @NgModule({
+
+    imports: [
+        CdkTreeModule,
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatButtonToggleModule,
+        MatTreeModule,
+        OverlayModule,
+        PortalModule,
+        MatBadgeModule,
+        MatGridListModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+       
+    ],
 
     exports: [
         CdkTreeModule,
@@ -71,7 +106,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatRadioModule,
         MatDatepickerModule,
         MatTooltipModule,
-       
+      
     ]
 })
 export class AppMaterialModule {}

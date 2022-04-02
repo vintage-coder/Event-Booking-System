@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import {Route, Router} from '@angular/router';
 import {NgForm}  from '@angular/forms';
 import {CustomValidationService} from './../../Services/custom-validation.service';
-import {AuthenticationService} from './../../Services/authentication.service';
+import {AuthenticationService} from '../../Services/Authentication/authentication.service';
 import {GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
 import {ExternalAuthDto} from './../../Models/ExternalAuthDto'
 
@@ -12,6 +12,7 @@ import {ExternalAuthDto} from './../../Models/ExternalAuthDto'
 import { SocialUser } from "angularx-social-login";
 // import { GoogleLoginProvider } from "angularx-social-login";
 
+import {environment} from './../../../environments/environment';
 
 
 @Component({
@@ -39,11 +40,11 @@ export class LoginComponent implements OnInit {
     this.loginForm=this.fb.group({
       name:[''],
       password:['',Validators.compose([Validators.required, this.customValidator.patternValidator()])],
-      confirmPassword:['', [Validators.required]]
+      //confirmPassword:['', [Validators.required]]
     },
-    {
-      validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
-    }
+    // {
+    //   validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
+    // }
     );
 
 
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
         alert('Form Submitted succesfully!!!\n Check the values in browser console.')
         console.log("name : "+this.loginForm.value.name);
         console.log("password : "+this.loginForm.value.password);
-        console.log("confirm password : "+this.loginForm.value.confirmPassword);
+        //console.log("confirm password : "+this.loginForm.value.confirmPassword);
         console.table(this.loginForm.value);
 
         const credentials = JSON.stringify({ "username": this.loginForm.value.name, "password": this.loginForm.value.password })
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit {
     }
 
 
-    externalLogin()
+    externalGoogleLogin()
     {
       console.log("External login was called ......");
 
@@ -96,6 +97,8 @@ export class LoginComponent implements OnInit {
             idToken: user.idToken
           }
 
+          this.validateExternalAuth(externalAuth);
+
           console.log('idToken: ' + user.idToken);
 
       },error =>{
@@ -105,19 +108,24 @@ export class LoginComponent implements OnInit {
     }
 
     
-    // private validateExternalAuth(externalAuth: ExternalAuthDto) {
-    //   this._authService.externalLogin('api/v1/GoogleAuth/externallogin', externalAuth)
-    //     .subscribe(res => {
-    //       localStorage.setItem("token", res.token);
-    //       this._authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
-    //       this._router.navigate([this._returnUrl]);
-    //     },
-    //     error => {
-    //       this.errorMessage = error;
-    //       this.showError = true;
-    //       this._authService.signOutExternal();
-    //     });
-    // }
+
+    externalFacebookLogin()
+    {
+      console.log('facebook login was clicked....');
+
+    }
+
+    private validateExternalAuth(externalAuth: ExternalAuthDto) {
+      this.http.post(`${environment.apiURL}`+'/api/v1/externallogin', externalAuth)
+        .subscribe(res => {
+          //localStorage.setItem("token", res.token);
+          console.log("google login success");
+        },
+        error => {
+     
+         console.log("Error response: " + error);
+        });
+    }
 
 
 
