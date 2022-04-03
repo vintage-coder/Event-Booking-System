@@ -16,17 +16,21 @@ namespace EBSystem.Authentication.API.Controllers.v1
     {
         private readonly IConfiguration _configuration;
         private readonly IConfigurationSection _goolgeSettings;
-        private readonly GoogleHandlers _googleHandler;
+        private readonly GoogleHelper _googleHelper;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly JWTHandlers _jwtHandler;
+        private readonly JWTHelper _jwtHandler;
 
 
 
-        public GoogleAuthController(IConfiguration configuration, GoogleHandlers googleHandler)
+        public GoogleAuthController(IConfiguration configuration, 
+            GoogleHelper googleHelper, 
+            UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
+
             _configuration = configuration;
 
-            _googleHandler = googleHandler;
+            _googleHelper = googleHelper;
 
             _goolgeSettings = _configuration.GetSection("GoogleAuthSettings");
         }
@@ -34,11 +38,19 @@ namespace EBSystem.Authentication.API.Controllers.v1
         [HttpPost("ExternalLogin")]
         public async Task<IActionResult> ExternalLogin([FromBody] ExternalAuthDto externalAuth)
         {
-            var payload = await _googleHandler.VerifyGoogleToken(externalAuth);
+            var payload = await _googleHelper.VerifyGoogleToken(externalAuth);
             if (payload == null)
                 return BadRequest("Invalid External Authentication.");
             var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
+
+
+            //_userManager.
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+           
+          
+
+            
+            //var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (user == null)
             {
                 user = await _userManager.FindByEmailAsync(payload.Email);
@@ -50,7 +62,7 @@ namespace EBSystem.Authentication.API.Controllers.v1
                     await _userManager.CreateAsync(user);
 
 
-                    await _userManager.AddToRoleAsync(user, "Viewer");
+                    await _userManager.AddToRoleAsync(user, "User");
                     await _userManager.AddLoginAsync(user, info);
                 }
                 else
@@ -61,7 +73,7 @@ namespace EBSystem.Authentication.API.Controllers.v1
             if (user == null)
                 return BadRequest("Invalid External Authentication.");
 
-            var token = await _jwtHandler.GenerateToken(user);
+            var token = await _googleHelper.GenerateToken(user);
             return Ok(new { Token = token, IsAuthSuccessful = true });
 
         }

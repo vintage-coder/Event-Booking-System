@@ -22,53 +22,117 @@ namespace EBSystem.Authentication.API.Controllers.v1
         private readonly AuthenticateContext _authenticateContext;
         private readonly ITokenRepository _tokenRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-             
+        private readonly IConfigurationSection _jwtSettings;
+
+
 
 
 
         public AuthController(ITokenRepository tokenRepository, AuthenticateContext authenticateContext,
-            IConfiguration configuration, UserManager<ApplicationUser> userManager )
+            IConfiguration configuration,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+            )
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _configuration = configuration;
             _tokenRepository=tokenRepository;
             _authenticateContext=authenticateContext;
+
+            _jwtSettings = _configuration.GetSection("JWTSettings");
         }
 
-        [HttpPost, Route("login")]
-        public IActionResult Login([FromBody] LoginDto login)
+
+        [HttpPost]
+        [Route("login")]
+        public async  Task<IActionResult> Login([FromBody] LoginDto login)
         {
-            if (login == null)
+            var user=await _userManager.FindByNameAsync(login.UserName);
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, login.Password)) ;
             {
-                return BadRequest("Invalid Client Request");
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+
+
+                }
+
+                var authSignKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value));
+
+
+                var token = new JwtSecurityToken(
+                issuer: _jwtSettings.GetSection("validIssuer").Value,
+                audience: _jwtSettings.GetSection("validAudience").Value,
+                claims: authClaims,
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("expiryInMinutes").Value)),
+                signingCredentials: new SigningCredentials(authSignKey, SecurityAlgorithms.HmacSha256));
+
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo,
+                    User = user.UserName
+                });
+
             }
+            return Unauthorized();
 
-            var user = _authenticateContext.logins.FirstOrDefault(u => (u.UserName==login.UserName) 
-            && (u.Password==u.Password));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, login.UserName),
-                new Claim(ClaimTypes.Role, "Manager")
-            };
-
-            var accessToken = _tokenRepository.GenerateAccessToken(claims);
-            var refreshToken = _tokenRepository.GenerateRefreshToken();
-            user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(10);
-            _authenticateContext.SaveChanges();
-            return Ok(new
-            {
-                AccessToken = accessToken,
-                RefreshToken = refreshToken
-            });
+           
         }
+
+
+
+
+
+
+
+        //[HttpPost, Route("login")]
+        //public IActionResult Login([FromBody] LoginDto login)
+        //{
+        //    if (login == null)
+        //    {
+        //        return BadRequest("Invalid Client Request");
+        //    }
+
+        //    var user = _authenticateContext.logins.FirstOrDefault(u => (u.UserName==login.UserName) 
+        //    && (u.Password==u.Password));
+
+        //    if (user == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.Name, login.UserName),
+        //        new Claim(ClaimTypes.Role, "Manager")
+        //    };
+
+        //    var accessToken = _tokenRepository.GenerateAccessToken(claims);
+        //    var refreshToken = _tokenRepository.GenerateRefreshToken();
+        //    user.RefreshToken = refreshToken;
+        //    user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(10);
+        //    _authenticateContext.SaveChanges();
+        //    return Ok(new
+        //    {
+        //        AccessToken = accessToken,
+        //        RefreshToken = refreshToken
+        //    });
+        //}
 
         [HttpPost]
         [Route("refresh")]
@@ -125,14 +189,14 @@ namespace EBSystem.Authentication.API.Controllers.v1
 
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register([FromBody] Register register)
+        public async Task<IActionResult> Register([FromBody] RegisterDto register)
         {
             var userExist = await _userManager.FindByNameAsync(register.UserName) ;
 
             if(userExist!=null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response { Status = "Error", Message = "Error internal server" });
+                    new Response { Status = "Status", Message = "User already Exists" });
             }
 
             ApplicationUser user = new ApplicationUser()
@@ -148,12 +212,67 @@ namespace EBSystem.Authentication.API.Controllers.v1
             if (!result.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response { Status = "Error", Message = "User not created successfully" });
+                    new Response { Status = "Status", Message = "User not created successfully" });
             }
 
-            return Ok(new Response { Status = "Success", Message = "User not Created Successfully" });
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
+            }
+
+                return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
 
         }
 
+
+
+        [HttpPost]
+        [Route("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto register)
+        {
+            var userExist = await _userManager.FindByNameAsync(register.UserName);
+
+            if (userExist != null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User already Exists" });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = register.UserName,
+            };
+
+
+            var result = await _userManager.CreateAsync(user, register.Password);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User not created successfully" });
+            }
+
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+            }
+
+            return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+
+        }
     }
 }

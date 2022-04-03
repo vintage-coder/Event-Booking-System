@@ -69,8 +69,8 @@ builder.Services.AddAuthentication(options =>
 })
         .AddGoogle(options =>
         {
-            options.ClientId = "[MyGoogleClientId]";
-            options.ClientSecret = "[MyGoogleSecretKey]";
+            options.ClientId = "473645421288-192r2fjahgshbp2s4isqta4m59jrlp3j.apps.googleusercontent.com";
+            options.ClientSecret = "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";
         });
 
 
@@ -97,9 +97,9 @@ builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwa
 builder.Services.AddTransient<ITokenRepository, TokenRepository>();
 
 
-builder.Services.AddTransient<GoogleHelper>();
+builder.Services.AddScoped<GoogleHelper>();
 
-builder.Services.AddTransient<JWTHelper>();
+builder.Services.AddScoped<JWTHelper>();
 
 
 
