@@ -4,6 +4,14 @@
     color: whitesmoke;
 } */
 
+
+.row
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
 mat-toolbar .row1
 {
     background-color: #032152;
@@ -15,6 +23,9 @@ mat-toolbar .row1
 a {
     color: white;
 }
+
+
+
 
 mat-toolbar .row2
 {
@@ -30,3 +41,19 @@ mat-toolbar .row2
     margin-left: 450px;
 }
 
+
+
+/* Responsivenes */
+
+/*responsive*/
+@media(max-width: 767px){
+    .col-md-4{
+      width: 50%;
+      margin-bottom: 30px;
+  }
+  }
+  @media(max-width: 574px){
+    .col-md-4{
+      width: 100%;
+  }
+}
