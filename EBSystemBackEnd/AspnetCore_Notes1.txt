@@ -1,0 +1,176 @@
+
+
+====================================================Register User=================================
+
+
+[Route("Register")]
+        public async Task<IActionResult> Register([FromBody] Register register)
+        {
+            var userExist = await _userManager.FindByNameAsync(register.UserName) ;
+
+            if(userExist!=null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User already Exists" });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                SecurityStamp=Guid.NewGuid().ToString(),
+                UserName=register.UserName,
+            };
+
+
+            var result=await _userManager.CreateAsync(user,register.Password);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User not created successfully" });
+            }
+
+            return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+
+        }
+
+
+=================================================================================================
+
+ [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto register)
+        {
+            var userExist = await _userManager.FindByNameAsync(register.UserName) ;
+
+            if(userExist!=null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User already Exists" });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                SecurityStamp=Guid.NewGuid().ToString(),
+                UserName=register.UserName,
+            };
+
+
+            var result=await _userManager.CreateAsync(user,register.Password);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User not created successfully" });
+            }
+
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
+            }
+
+                return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+
+        }
+
+
+
+        [HttpPost]
+        [Route("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto register)
+        {
+            var userExist = await _userManager.FindByNameAsync(register.UserName);
+
+            if (userExist != null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User already Exists" });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = register.UserName,
+            };
+
+
+            var result = await _userManager.CreateAsync(user, register.Password);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Status = "Status", Message = "User not created successfully" });
+            }
+
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+            }
+
+
+
+
+            return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+
+        }
+
+================================================================================================
+
+[HttpPost, Route("login")]
+        public IActionResult Login([FromBody] LoginDto login)
+        {
+            if (login == null)
+            {
+                return BadRequest("Invalid Client Request");
+            }
+
+            var user = _authenticateContext.logins.FirstOrDefault(u => (u.UserName==login.UserName) 
+            && (u.Password==u.Password));
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, login.UserName),
+                new Claim(ClaimTypes.Role, "Manager")
+            };
+
+            var accessToken = _tokenRepository.GenerateAccessToken(claims);
+            var refreshToken = _tokenRepository.GenerateRefreshToken();
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(10);
+            _authenticateContext.SaveChanges();
+            return Ok(new
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            });
+        }
+
+
+============================================================================================
+
+
+
+
+
+
+
+
