@@ -1,0 +1,227 @@
+[
+{
+	"eventId": 1,
+	"eventName":"IPL",
+	"startDate":"2022-03-23",
+	"endDate":"2022-04-30",
+	"NoOfTickets":5000,
+	"eventCategoryId":1,
+	"ticketCategoryId":1,
+	"eventCategory":
+	{
+		"eventCategoryId":1,
+		"eventCategoryName:"Sports"
+	},
+	"ticketCategory":
+	{
+		"ticketCategoryId":1,
+		"ticketCategoryName":"Premium"
+	}
+},
+{
+	"eventId": 2,
+	"eventName":"Super Singer",
+	"startDate":"2022-03-23",
+	"endDate":"2022-04-30",
+	"NoOfTickets":5000,
+	"eventCategoryId":2,
+	"ticketCategoryId":2,
+	"eventCategory":
+	{
+		"eventCategoryId":1,
+		"eventCategoryName:"Singer"
+	},
+	"ticketCategory":
+	{
+		"ticketCategoryId":1,
+		"ticketCategoryName":"Silver"
+	}
+},
+
+]
+
+==========================================================================
+[
+	{
+		"eventCategoryId":1,
+		"eventCategoryName":"Sports"
+	},
+	{
+		"eventCategoryId":2,
+		"eventCategoryName":"Singing"
+	},
+	{
+		"eventCategoryId":3,
+		"eventCategoryName":"Dance"
+	},
+	{
+		"eventCategoryId":4,
+		"eventCategoryName":"Gameing"
+	}
+]
+
+
+==============================================================
+[
+	{
+		"ticketCategoryId":1,
+		"ticketCategoryName":"Platinum +",
+		"ticketPrice":10000	
+	}, 
+	{
+		"ticketCategoryId":2,
+		"ticketCategoryName":"Platinum ",
+		"ticketPrice":8000	
+	},
+	{
+		"ticketCategoryId":3,
+		"ticketCategoryName":"Gold",
+		"ticketPrice":6000	
+	},
+	{
+		"ticketCategoryId":4,
+		"ticketCategoryName":"Silver",
+		"ticketPrice":5000	
+	},
+	{
+		"ticketCategoryId":5,
+		"ticketCategoryName":"Bronze",
+		"ticketPrice":3000	
+	}
+]
+
+
+=============================================================
+
+[
+{
+	"userId":1,
+	"userName":"Gowtham@123",
+	"firstName":"Gowthaman",
+	"lastName":"Vai",
+	"email":"gowtham@gmail.com",
+	"phone":8984623842,
+	"password":"Zt5423BFBD"	
+
+},
+{
+	"userId":2,
+	"userName":"anbu@123",
+	"firstName":"anbu",
+	"lastName":"Vai",
+	"email":"anbu@gmail.com",
+	"phone":8984623842,
+	"password":"Zt5423BFBD"	
+}
+]
+
+
+=======================================================
+
+[
+{
+	"orderId":1,
+	"eventId":1,
+	"paymentTypeId":1,
+	"event":
+	{
+		
+	},
+	"paymentType":
+	{
+		"paymentTypeId":1,
+		"paymentTypeName":"Cash"
+	},
+	"user":
+	{
+		"userId":2,
+		"userName":"anbu@123",
+		"firstName":"anbu",
+		"lastName":"Vai",
+		"email":"anbu@gmail.com",
+		"phone":8984623842,
+		"password":"Zt5423BFBD"	
+	},
+	"address":
+	{
+		"addressId":5,
+		"city":"chennai",
+		"state":"Tamil Nadu",
+		"country":"India"
+	}
+
+	
+	"orderDate":"2022-03-30",
+	"ticketsBooked":10
+},
+{
+	"orderId":1,
+	"eventId":1,
+	"paymentTypeId":1,
+	"paymentType":
+	{
+		"paymentTypeId":2,
+		"paymentTypeName":"Credit"
+	}
+	
+}
+]
+
+
+====================================================
+[
+	{
+		"paymentTypeId":1,
+		"paymentTypeName":"Cash"
+	},
+	{
+		"paymentTypeId":2,
+		"paymentTypeName":"Credit"
+	},
+	{
+		"paymentTypeId":3,
+		"paymentTypeName":"Debit"
+	}
+]
+
+=========================================================
+[
+	{
+		"addressId":1,
+		"city":"Bangalore",
+		"state":"Karnataka",
+		"country":"India"
+	},
+	{
+		"addressId":2,
+		"city":"Trivandrum",
+		"state":"Kerala",
+		"country":"India"
+	},
+	{
+		"addressId":3,
+		"city":"Amaravathi",
+		"state":"Andra",
+		"country":"India"
+	},
+	{
+		"addressId":4,
+		"city":"mumbai",
+		"state":"Maharastra",
+		"country":"India"
+	},
+	{
+		"addressId":5,
+		"city":"chennai",
+		"state":"Tamil Nadu",
+		"country":"India"
+	},
+]
+
+===========================================================
+
+
+
+
+
+
