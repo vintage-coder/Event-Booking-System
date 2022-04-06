@@ -1,6 +1,8 @@
 import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { DateAdapter, NativeDateModule } from '@angular/material/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { EventDto } from 'src/app/Dtos/EventDto';
 
 
 
@@ -12,24 +14,70 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AdminPageComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
+  displayedColumns1: string[] = ['eventId', 'eventName', 'NoOfTickets',
+  'eventCategoryName', 'ticketCategoryName','startDate','endDate'];
+
+  displayedColumns: string[] = ['position', 'name', 'weight',
+  'symbol'];
+
+
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  dataSource1 = new MatTableDataSource<EventDto>(EVENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  @ViewChild(MatPaginator) paginator1: MatPaginator;
+
   ngAfterViewInit() {
+
     this.dataSource.paginator = this.paginator;
+    this.dataSource1.paginator = this.paginator;
   }
   constructor() { }
 
   ngOnInit(): void {
-    
-  
+
+
   }
 
 
-  
+
 }
+
+const EVENT_DATA:EventDto[]=[
+  { eventId:1, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:2, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:3, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:4, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:5, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:6, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:7, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:8, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:9, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+  { eventId:10, eventName:"IPL",NoOfTickets:5000,
+  eventCategoryName:"Sports",ticketCategoryName:"Platinum",
+  startDate:"2022-03-23", endDate:"2022-04-23" },
+];
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -60,3 +108,24 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
+
+
+// {
+// 	"eventId": 1,
+// 	"eventName":"IPL",
+// 	"startDate":"2022-03-23",
+// 	"endDate":"2022-04-30",
+// 	"NoOfTickets":5000,
+// 	"eventCategoryId":1,
+// 	"ticketCategoryId":1,
+// 	"eventCategory":
+// 	{
+// 		"eventCategoryId":1,
+// 		"eventCategoryName:"Sports"
+// 	},
+// 	"ticketCategory":
+// 	{
+// 		"ticketCategoryId":1,
+// 		"ticketCategoryName":"Premium"
+// 	}
+// }
