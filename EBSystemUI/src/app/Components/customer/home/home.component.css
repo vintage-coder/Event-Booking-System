@@ -1,0 +1,81 @@
+.container
+{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.table
+{
+    margin: 10px;
+}
+.event-card
+{
+    
+    width: 500px;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+
+.event-card:hover
+{
+    background-color: rgb(62, 62, 62);
+    color: whitesmoke;
+    cursor:pointer;
+    transform: scale(1.03);
+    transition: all 1s ease;
+}
+
+.mat-card-image
+{
+    background-size: cover;
+}
+
+mat-card-actions
+{
+    display: flex;
+    justify-content: center;
+   
+}
+
+mat-card-actions button
+{
+   padding: 10px;
+   font-size: 15px;
+   font-weight: bold;
+   margin-left: 70px;
+   /* outline-style: solid;
+   outline-color: green;
+   outline-width: 1px; */
+   
+}
+
+mat-card-actions button:hover
+{
+    background-color: chocolate;
+}
+
+mat-card-content p
+{
+    padding: 0px;
+}
+
+
+mat-card-header
+{
+    /* height: 50px; */
+    display: block;
+    text-align: center;
+    
+}
+
+mat-card-title
+{  
+    color: brown;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    
+}

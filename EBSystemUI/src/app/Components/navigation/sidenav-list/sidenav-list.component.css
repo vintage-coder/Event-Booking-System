@@ -1,0 +1,39 @@
+mat-nav-list a
+{
+    height: 50px;
+
+}
+
+mat-nav-list a mat-icon
+{
+    margin-right: 40px;
+    
+}
+
+mat-nav-list a:hover
+{
+    /* background-color: #032152; */
+    color: black;
+    background-color: black;
+    
+}
+
+mat-nav-list
+{
+    background-color: #032152;
+    
+}
+
+mat-nav-list a span
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+mat-nav-list a mat-icon
+{
+    color: whitesmoke;
+}
+
+

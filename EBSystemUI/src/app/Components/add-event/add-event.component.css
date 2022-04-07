@@ -1,0 +1,42 @@
+/* .container-fluid
+{
+    background-color: whitesmoke;
+}
+
+
+.form-group input[type="text"]
+{
+    width: 500px;
+}
+
+.form-group input[type="password"]
+{
+    width: 500px;
+}
+
+.form-group div#item
+{
+    float: right;
+}  */
+
+
+
+.container
+{
+    margin-top: 100px;
+    margin-bottom: 900px;
+    background-color: rgb(219, 20, 20);
+    margin-left: 250px;
+    margin-right: 10px;
+}
+table
+{
+    width: 100%;
+}
+
+
+/* .container h1
+{
+    background-color: blueviolet;
+    color: darkblue;
+} */
