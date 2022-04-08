@@ -18,12 +18,13 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuardGuard } from './Guards/auth-guard.guard';
 import { AdminPageComponent } from './Components/admin-page/admin-page.component';
 import { UserPageComponent } from './Components/user-page/user-page.component';
-import { HomeComponent } from './Components/home/home.component';
-import {GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
+import { HomeComponent } from './Components/customer/home/home.component';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
 import { AddEventComponent } from './Components/add-event/add-event.component';
 import { SidenavListComponent } from './Components/navigation/sidenav-list/sidenav-list.component';
 import { CheckOutComponent } from './Components/check-out/check-out.component';
 import { ToastrModule } from 'ngx-toastr';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 
@@ -36,7 +37,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,   
+    DashboardComponent,
     HeaderComponent,
     FooterComponent,
     EventsListComponent,
@@ -57,13 +58,14 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    FlexLayoutModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ToastrModule.forRoot(),
     JwtModule.forRoot({
-      config: {       
+      config: {
         tokenGetter: tokenGetter,
         whitelistedDomains: ["localhost:57589"],
         blacklistedRoutes: []
@@ -71,7 +73,7 @@ export function tokenGetter() {
     })
 
   ],
-  
+
   providers: [
     AuthGuardGuard,
     {
@@ -82,10 +84,17 @@ export function tokenGetter() {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider('473645421288-192r2fjahgshbp2s4isqta4m59jrlp3j.apps.googleusercontent.com')
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '300303215559380'
+            )
           }
         ]
       }
     },
+
   ],
   bootstrap: [AppComponent]
 })

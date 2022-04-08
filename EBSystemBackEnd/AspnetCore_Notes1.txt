@@ -168,6 +168,57 @@
 ============================================================================================
 
 
+        [HttpPost]
+        [Route("login")]
+        public async  Task<IActionResult> Login([FromBody] LoginDto login)
+        {
+            var user=await _userManager.FindByNameAsync(login.UserName);
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, login.Password)) ;
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+
+
+                }
+
+                var authSignKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value));
+
+
+                var token = new JwtSecurityToken(
+                issuer: _jwtSettings.GetSection("validIssuer").Value,
+                audience: _jwtSettings.GetSection("validAudience").Value,
+                claims: authClaims,
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("expiryInMinutes").Value)),
+                signingCredentials: new SigningCredentials(authSignKey, SecurityAlgorithms.HmacSha256));
+
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo,
+                    User = user.UserName
+                });
+
+            }
+            return Unauthorized();
+
+           
+        }
+
+=========================================================================================================
+
+
 
 
 

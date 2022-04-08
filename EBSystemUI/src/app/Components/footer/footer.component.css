@@ -1,59 +1,32 @@
-/* mat-toolbar-row
-{
-    height: 150px;
-    color: whitesmoke;
-} */
-
-
-.row
-{
-    display: flex;
-    flex-wrap: wrap;
+footer{
+  background: tomato;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; /*flex items will wrap onto multiple lines, from top to bottom.*/
+  padding: 10px;
 }
-
-
-mat-toolbar .row1
-{
-    background-color: #032152;
-    margin-right: 0px;
-    padding: 0px;
-    height: 150px;   
+.section-top{
+ background: yellow;
+ display: flex;
+ justify-content: center; /*items are centered along the line*/
+ padding: 20px 0;
+ }
+.section-bottom{
+  background: blue;
+  text-align: center;
+  padding: 15px 0;
 }
-
-a {
-    color: white;
+.col{
+  margin: 0 15px;
+  width: 25% /*optional*/
 }
-
-
-
-
-mat-toolbar .row2
-{
-    background-color: #032152;
-    margin-right: 0px;
-    padding: 0px;
+@media all and (max-width: 600px){ /*style if screen size is <600px*/
+.section-top{
+    flex-direction: column;
 }
-
-.row2 p
-{
-    color: whitesmoke;
-    text-align: center;
-    margin-left: 450px;
+.col{
+  text-align: center;
+  width: 100%;
+  margin: 0
 }
-
-
-
-/* Responsivenes */
-
-/*responsive*/
-@media(max-width: 767px){
-    .col-md-4{
-      width: 50%;
-      margin-bottom: 30px;
-  }
-  }
-  @media(max-width: 574px){
-    .col-md-4{
-      width: 100%;
-  }
 }

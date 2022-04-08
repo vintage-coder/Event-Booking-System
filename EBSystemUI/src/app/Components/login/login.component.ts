@@ -5,14 +5,15 @@ import {Route, Router} from '@angular/router';
 import {NgForm}  from '@angular/forms';
 import {CustomValidationService} from './../../Services/custom-validation.service';
 import {AuthenticationService} from '../../Services/Authentication/authentication.service';
-import {GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
-import {ExternalAuthDto} from './../../Models/ExternalAuthDto'
+import {FacebookLoginProvider,GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
+import {ExternalAuthDto} from './../../Models/ExternalAuthDto';
 
 // import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 // import { GoogleLoginProvider } from "angularx-social-login";
 
 import {environment} from './../../../environments/environment';
+import {NotificationService} from './../../Services/notification.service';
 
 
 @Component({
@@ -25,18 +26,23 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   submitted = false;
   showError:boolean;
-  
+
+  public selectedValue:string;
+
+  public userRoles:string[]=["Admin","User"];
+
+
   public user: SocialUser = new SocialUser;
   constructor(private fb:FormBuilder, private customValidator:CustomValidationService,
      private http:HttpClient,
      private router:Router,private authenticationService:AuthenticationService,
-     private socialAuthService: SocialAuthService
+     private socialAuthService: SocialAuthService,private notification:NotificationService
      ) {
-   
+
   }
 
   ngOnInit(): void {
-    
+
     this.loginForm=this.fb.group({
       name:[''],
       password:['',Validators.compose([Validators.required, this.customValidator.patternValidator()])],
@@ -59,7 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
     onLogin()
-    {      
+    {
 
       this.submitted=true;
       if(this.loginForm.valid)
@@ -72,11 +78,11 @@ export class LoginComponent implements OnInit {
         console.table(this.loginForm.value);
 
         const credentials = JSON.stringify({ "username": this.loginForm.value.name, "password": this.loginForm.value.password })
-       
+
         this.authenticationService.getWebToken(credentials);
       }
 
-     
+
     }
 
 
@@ -97,41 +103,70 @@ export class LoginComponent implements OnInit {
             idToken: user.idToken
           }
 
-          this.validateExternalAuth(externalAuth);
 
-          console.log('idToken: ' + user.idToken);
-
-      },error =>{
-            console.log(error);
+          this.authenticationService.validateExternalAuth(externalAuth)
+          .subscribe((res)=>
+          {
+            localStorage.setItem("token",res.idToken);
+            this.notification.showSuccess("Google login Sucessfully","Success");
+            console.log("Google signin successfully");
+            this.router.navigate(["/admin"]);
+          },
+          error =>
+          {
+            console.log("Error response: " + error);
+          });
       });
- 
-    }
+  }
 
-    
+
 
     externalFacebookLogin()
     {
       console.log('facebook login was clicked....');
+      this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(res =>{
+        const user:SocialUser={...res};
+        console.log(user);
 
+        const externalAuth: ExternalAuthDto = {
+          provider: user.provider,
+          idToken: user.authToken
+        }
+
+        console.log(externalAuth.idToken  + "\n" + externalAuth.provider);
+
+      });
     }
-
-    private validateExternalAuth(externalAuth: ExternalAuthDto) {
-      this.http.post(`${environment.apiURL}`+'/api/v1/externallogin', externalAuth)
-        .subscribe(res => {
-          //localStorage.setItem("token", res.token);
-          console.log("google login success");
-        },
-        error => {
-     
-         console.log("Error response: " + error);
-        });
-    }
-
-
-
 
   }
-  
+
+
+
+
+
+
+
+
+
+    // private validateExternalAuth(externalAuth: ExternalAuthDto) {
+    //   this.http.post<ExternalAuthDto>(`${environment.apiURL}`+'/api/v1/googleauth/externallogin', externalAuth)
+    //     .subscribe(res => {
+    //       localStorage.setItem("token", res.idToken);
+    //       this.notification.showSuccess("sucess","Google Sign Successfully");
+    //       console.log("google login success");
+    //     },
+    //     error => {
+
+    //      console.log("Error response: " + error);
+    //     });
+    // }
+
+
+
+
+
+
 
 
 

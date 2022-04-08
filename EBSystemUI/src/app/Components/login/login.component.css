@@ -42,19 +42,19 @@ div.form-group label
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
     
 }
 
 div.form-group input
 {
     margin-top: 10px;
-    width: 400px;
+    width: 200px;
 }
 
-div .form-group
-{
-    margin-top: 20px;
-}
+
 
 div#external
 {
@@ -90,3 +90,18 @@ div#external
       margin-left: 25px;
       margin-top: 20px;
   }
+  .form-group
+  {
+      display: flex;
+      margin: 20px;
+
+  }
+
+  div label
+  {
+      justify-content: center;
+      align-items: center;
+  }
+  
+ 
+  

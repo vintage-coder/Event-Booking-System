@@ -2,14 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.API", "EBSystem.API\EBSystem.API.csproj", "{679433E7-3BC8-4C67-8108-5DAC9FFBF3E3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.Models", "EBSystem.Models\EBSystem.Models.csproj", "{B2646E78-9307-4097-8EFC-8D3B19086CF7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.Services", "EBSystem.Services\EBSystem.Services.csproj", "{0BE852C2-FA58-4015-868E-FBA3D9F40447}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.Tests", "EBSystem.Tests\EBSystem.Tests.csproj", "{72DE929E-5CBE-46CF-B6C5-27F5B03DD936}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EBSystem.Event.API", "EBSystem.Event.API", "{CD16C171-1F94-4DD8-841D-FDB3D37FE629}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EBSystem.Authentication.API", "EBSystem.Authentication.API", "{B633EE21-A4C4-4F1D-9B4E-A3282F6A4799}"
@@ -36,7 +28,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.Order.API", "Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EBSystem.Authentication.API", "Services\EBSystem.User.API\EBSystem.Authentication.API.csproj", "{A30EF64E-AD81-44C0-B6A0-68568748844D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monolithic", "Monolithic", "{2D2D3336-60E7-4B5D-9459-513CAAFAEA33}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{484B571B-5257-4506-AABC-8C4125AFE37A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{A64C5FE2-214F-4228-9ED0-B7A4FD77F9BF}"
+	ProjectSection(SolutionItems) = preProject
+		AspnetCore_Notes1.txt = AspnetCore_Notes1.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,18 +41,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{679433E7-3BC8-4C67-8108-5DAC9FFBF3E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{679433E7-3BC8-4C67-8108-5DAC9FFBF3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{679433E7-3BC8-4C67-8108-5DAC9FFBF3E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2646E78-9307-4097-8EFC-8D3B19086CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2646E78-9307-4097-8EFC-8D3B19086CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2646E78-9307-4097-8EFC-8D3B19086CF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BE852C2-FA58-4015-868E-FBA3D9F40447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BE852C2-FA58-4015-868E-FBA3D9F40447}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BE852C2-FA58-4015-868E-FBA3D9F40447}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72DE929E-5CBE-46CF-B6C5-27F5B03DD936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72DE929E-5CBE-46CF-B6C5-27F5B03DD936}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72DE929E-5CBE-46CF-B6C5-27F5B03DD936}.Release|Any CPU.Build.0 = Release|Any CPU
 		{386EE77C-1B06-4413-BAD4-6C26FD96165E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{386EE77C-1B06-4413-BAD4-6C26FD96165E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{386EE77C-1B06-4413-BAD4-6C26FD96165E}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -80,10 +65,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{679433E7-3BC8-4C67-8108-5DAC9FFBF3E3} = {2D2D3336-60E7-4B5D-9459-513CAAFAEA33}
-		{B2646E78-9307-4097-8EFC-8D3B19086CF7} = {2D2D3336-60E7-4B5D-9459-513CAAFAEA33}
-		{0BE852C2-FA58-4015-868E-FBA3D9F40447} = {2D2D3336-60E7-4B5D-9459-513CAAFAEA33}
-		{72DE929E-5CBE-46CF-B6C5-27F5B03DD936} = {2D2D3336-60E7-4B5D-9459-513CAAFAEA33}
 		{CD16C171-1F94-4DD8-841D-FDB3D37FE629} = {BFA98AA3-9B74-4CEA-A56E-8F5E9ADF5A21}
 		{B633EE21-A4C4-4F1D-9B4E-A3282F6A4799} = {BFA98AA3-9B74-4CEA-A56E-8F5E9ADF5A21}
 		{147FFF0B-76D6-47D5-B499-0944A28CF32F} = {BFA98AA3-9B74-4CEA-A56E-8F5E9ADF5A21}

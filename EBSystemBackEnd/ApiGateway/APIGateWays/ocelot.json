@@ -1,25 +1,39 @@
 {
   "Routes": [
+    // Authentication Service
     {
       "DownstreamPathTemplate": "/api/s1/WeatherForecast",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 48604
+          "Host": "localhost", //http://localhost:19158
+          "Port": 19158
         }
       ],
       "UpstreamPathTemplate": "/gateway/s1/WeatherForecast",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
-
+    //Order Service
     {
       "DownstreamPathTemplate": "/api/s2/WeatherForecast",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 15211
+          "Host": "localhost", //http://localhost:54180
+          "Port": 54180
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/s2/WeatherForecast",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    //Event Service
+    {
+      "DownstreamPathTemplate": "/api/s2/WeatherForecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost", //http://localhost:18708
+          "Port": 18708
         }
       ],
       "UpstreamPathTemplate": "/gateway/s2/WeatherForecast",

@@ -245,3 +245,16 @@ public validateExternalAuth(externalAuth: ExternalAuthDto):Observable<ExternalAu
 
 
 ======================================================================
+SocialUser {id: '526085065620167', name: 'Shakira Isabel', email: 'gowthamanvasudev@gmail.com', photoUrl: 'https://graph.facebook.com/526085065620167/picture?type=normal', firstName: 'Shakira', …}
+authToken: "EAAERH8p9AtQBAASnMEZBe8qUANAnIovF90JwiqQytEVngLrV8RP6SB6wvQqpNUT6clTEvDQpIfGVDnXuKPcxK9W17Qmnl6HLZA9MQI8LwNazJewev6WHVtJTZBDHuQlFYFJ5PJ1uqOZBIFpYpcyJJ0mlV3er72AzAIGoOrN6M8JZCosshbAy9Lnkhdi5DC0eSEVSjoLHZAnrS7OVuvDjFi"
+email: "gowthamanvasudev@gmail.com"
+firstName: "Shakira"
+id: "526085065620167"
+lastName: "Isabel"
+name: "Shakira Isabel"
+photoUrl: "https://graph.facebook.com/526085065620167/picture?type=normal"
+provider: "FACEBOOK"
+response: {name: 'Shakira Isabel', email: 'gowthamanvasudev@gmail.com', picture: {…}, first_name: 'Shakira', last_name: 'Isabel', …}
+[[Prototype]]: Object
+
+========================================================================================

@@ -1,5 +1,7 @@
+using EBSystem.Order.API.DBContexts;
 using EBSystem.Order.API.Swagger.Configuration;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -22,6 +24,10 @@ builder.Services.AddCors(options =>
     });
 });
 
+
+
+builder.Services.AddDbContext<OrderContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("Orders")));
 
 builder.Services.AddEndpointsApiExplorer();
 
