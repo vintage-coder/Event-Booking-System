@@ -10,7 +10,7 @@ import { HttpClientModule} from "@angular/common/http";
 import { AppMaterialModule } from "./app.material-module";
 import { EventsListComponent } from './Components/events-list/events-list.component';
 import { LoginComponent } from './Components/login/login.component';
-import { LogoutComponent } from './Components/logout/logout.component';
+
 import { RegisterComponent } from './Components/register/register.component';
 import { CustomerComponent } from './Components/customer/customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { SidenavListComponent } from './Components/navigation/sidenav-list/siden
 import { CheckOutComponent } from './Components/check-out/check-out.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ConfirmDialogComponent } from './Components/Pop-Ups/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -42,7 +43,7 @@ export function tokenGetter() {
     FooterComponent,
     EventsListComponent,
     LoginComponent,
-    LogoutComponent,
+
     RegisterComponent,
     CustomerComponent,
     AdminPageComponent,
@@ -50,7 +51,8 @@ export function tokenGetter() {
     HomeComponent,
     AddEventComponent,
     SidenavListComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

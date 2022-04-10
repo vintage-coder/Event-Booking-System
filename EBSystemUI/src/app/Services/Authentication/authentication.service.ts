@@ -5,6 +5,7 @@ import { environment } from './../../../environments/environment';
 import {UserRegistrationDto} from './../../Dtos/UserRegistrationDto';
 import {RegistrationResponseDto} from './../../Dtos/RegistrationResponseDto';
 import {NotificationService} from './../notification.service';
+import {ExternalResDto} from './../../Models/ExternalResDto';
 import {ExternalAuthDto} from './../../Models/ExternalAuthDto';
 import { Observable } from 'rxjs';
 
@@ -42,7 +43,7 @@ export class AuthenticationService {
 
   public registerUser(body:UserRegistrationDto)
   {
-   this.http.post(`${environment.apiURL}`+"/api/v1/auth/registration", body, {
+   this.http.post(`${environment.apiURL}`+"/api/v1/auth/Register", body, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
@@ -54,10 +55,29 @@ export class AuthenticationService {
   }
   
 
-  public validateExternalAuth(externalAuth: ExternalAuthDto):Observable<ExternalAuthDto>
+  public validateExternalAuth(externalAuth: ExternalAuthDto)
   {
+
     
-    return this.http.post<ExternalAuthDto>(`${environment.apiURL}`+'/api/v1/googleauth/externallogin', externalAuth)
+  this.http.post<ExternalResDto>(`${environment.apiURL}`+'/api/v1/GoogleAuth/ExternalLogin', externalAuth,
+    {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    }).subscribe((res)=>{
+
+      console.log(res);
+
+      console.log("Token: "+res.token);
+    });
+
+
+    // return this.http.post<ExternalResDto>(`${environment.apiURL}`+'/api/v1/GoogleAuth/ExternalLogin', externalAuth,
+    // {
+    //   headers: new HttpHeaders({
+    //     "Content-Type": "application/json"
+    //   })
+    // });
     
   }
 

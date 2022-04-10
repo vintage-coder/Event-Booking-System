@@ -4,7 +4,7 @@
           <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eventModal">Add New Event</a>
       </div>
       <div class="col-md-6">
-          <a class="btn btn-success">View All Orders</a>
+          <a class="btn btn-success" (click)="ViewOrders()">View All Orders</a>
       </div>
 
 
@@ -12,52 +12,13 @@
     </div>
 
 
-
-    <div class="row" id="row2">
-        <div class="mat-elevation-z8 table1">
-            <table mat-table [dataSource]="dataSource">
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>
-
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-              </ng-container>
-
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                           showFirstLastButtons
-                           aria-label="Select page of periodic elements">
-            </mat-paginator>
-          </div>
-
-    </div>
-
-
+    <mat-tab-group>
+      <mat-tab label="Add Event"> 
+        
 
     <div class="row" id="row3">
       <div class="mat-elevation-z8 table1">
-          <table mat-table [dataSource]="dataSource1">
+          <table mat-table [dataSource]="dataSource">
 
             <ng-container matColumnDef="eventId">
               <th mat-header-cell *matHeaderCellDef> Event ID </th>
@@ -97,8 +58,8 @@
               <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
 
           <mat-paginator [pageSizeOptions]="[5, 10, 20]"
@@ -108,6 +69,70 @@
   </div>
 
 </div>
+      
+</mat-tab>
+      
+<mat-tab label="
+add Event"> 
+  
+
+  <div class="row" id="row3">
+    <div class="mat-elevation-z8 table1">
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="eventId">
+            <th mat-header-cell *matHeaderCellDef> Event ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.eventId}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="eventName">
+            <th mat-header-cell *matHeaderCellDef> Event Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.eventName}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="NoOfTickets">
+            <th mat-header-cell *matHeaderCellDef> No of Tickets </th>
+            <td mat-cell *matCellDef="let element"> {{element.NoOfTickets}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="eventCategoryName">
+            <th mat-header-cell *matHeaderCellDef> Event Category Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.eventCategoryName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ticketCategoryName">
+            <th mat-header-cell *matHeaderCellDef> Ticket Category Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.ticketCategoryName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+</div>
+
+</div>
+</mat-tab>
+      
+</mat-tab-group>
+
 
 
 

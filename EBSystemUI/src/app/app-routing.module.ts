@@ -5,7 +5,7 @@ import {FooterComponent } from './Components/footer/footer.component';
 import {EventsListComponent } from './Components/events-list/events-list.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { LoginComponent } from './Components/login/login.component';
-import { LogoutComponent } from './Components/logout/logout.component';
+
 import { RegisterComponent } from './Components/register/register.component';
 import { CustomerComponent } from './Components/customer/customer.component';
 import { AuthGuardGuard } from './Guards/auth-guard.guard';
