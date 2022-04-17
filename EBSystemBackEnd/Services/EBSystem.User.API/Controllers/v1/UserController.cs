@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EBSystem.User.API.Controllers.v1
 {
 
-    [Authorize(Roles =UserRoles.Admin)]
+    //[Authorize(Roles =UserRoles.Admin)]
     [ApiVersion("1.0")]
     [Route("ebs/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -21,7 +21,7 @@ namespace EBSystem.User.API.Controllers.v1
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult Get()
         {
 

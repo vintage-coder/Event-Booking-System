@@ -15,9 +15,42 @@ using System.Text;
 using EBSystem.Authentication.API.Handlers;
 using EBSystem.Authentication.API.Helpers;
 using Serilog;
+using Serilog.Exceptions;
 using Microsoft.OpenApi.Models;
+using Serilog.Events;
 
-var builder = WebApplication.CreateBuilder(args);
+var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+
+//Initialize Logger
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(config)
+    .Enrich.FromLogContext()
+    .Enrich.WithExceptionDetails()
+    .Enrich.WithMachineName()
+    .CreateLogger();
+
+
+var builder = WebApplication.CreateBuilder(args); ;
+
+
+    try
+    {
+        Log.Information("Application Starting.");
+      
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "The Application failed to start.");
+    }
+    finally
+    {
+        Log.CloseAndFlush();
+    }
+
+
 
 
 // ====================================Serilog configuration =============================
@@ -26,6 +59,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, config) =>
 {
     config.WriteTo.Console();
+
+    config.ReadFrom.Configuration(context.Configuration);
+
+    config.WriteTo.File("all.logs", restrictedToMinimumLevel: LogEventLevel.Warning, rollingInterval: RollingInterval.Day);
+
+
+
 });
 
 
