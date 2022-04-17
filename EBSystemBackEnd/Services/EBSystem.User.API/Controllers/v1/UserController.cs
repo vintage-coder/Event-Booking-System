@@ -13,11 +13,20 @@ namespace EBSystem.User.API.Controllers.v1
     [ApiController]
     public class UserController : ControllerBase
     {
-        
+
+        private readonly ILogger<UserController> _logger;
+        public UserController(ILogger<UserController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult Get()
         {
+
+            _logger.LogInformation($"User Controller get action method was called at {DateTime.Now}");
+
             return Ok( new
             {
                 ID = 1,

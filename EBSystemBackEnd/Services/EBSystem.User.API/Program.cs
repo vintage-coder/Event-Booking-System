@@ -14,13 +14,25 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
 using EBSystem.Authentication.API.Handlers;
 using EBSystem.Authentication.API.Helpers;
+using Serilog;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// ====================================Serilog configuration =============================
+
+
+builder.Host.UseSerilog((context, config) =>
+{
+    config.WriteTo.Console();
+});
 
 
 // ==============================Service configuration ===========================
 
 builder.Services.AddControllers();
+
 
 
 // ============================= Cross Origin Service ===========================
@@ -128,8 +140,33 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.OperationFilter<SwaggerDefaultValues>();
 
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme."
 
-    var xmlFile = $"EBSystem.User.API.xml";
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "bearer"
+                                }
+                            },
+                            new string[] {}
+                    }
+                });
+
+    var xmlFile = $"EBSystem.Authentication.API.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
@@ -149,8 +186,14 @@ if (app.Environment.IsDevelopment())
 }
 
 
+// ==========================Logger middleware Pipeline ====================================
+
+app.UseSerilogRequestLogging();
+
+
 //================================Cross Origin Request pipeline=========================================
 app.UseCors("EnableCORS");
+
 
 
 
