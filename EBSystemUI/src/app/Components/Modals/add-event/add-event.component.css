@@ -1,0 +1,37 @@
+
+
+.card-header
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-content:space-between;
+  align-content: center; */
+
+}
+
+.card-header span
+{
+  /* justify-content: center;
+  align-content: ; */
+}
+
+.card-header button
+{
+  margin-left: 100px;
+}
+
+.card-footer
+{
+  height: 70px;
+}
+
+mat-label
+{
+  width: 1200px;
+}
+
+mat-form-field
+{
+  width:170px;
+}

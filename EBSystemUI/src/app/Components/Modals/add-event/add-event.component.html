@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <form class="form" [formGroup]="addmore">
+        <div class="card">
+            <div class="card-header ">
+                <span>Add Events</span>
+                <button mat-icon-button  [mat-dialog-close]="false">
+                  <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mt-3 ml-3">
+                      <mat-label>Event Name</mat-label>
+                        <!-- <mat-form-field>
+                            <mat-label>Title</mat-label>
+                            <input matInput  formControlName="title">
+
+                        </mat-form-field> -->
+                    </div>
+                    <div class="col-md-3 mr-4">
+                      <!-- <mat-label>Title</mat-label> -->
+                        <mat-form-field>
+                            <mat-label>Event Name</mat-label>
+                            <input matInput  formControlName="title">
+
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt-3 ">
+                      <mat-label>Event Category</mat-label>
+
+                    </div>
+                    <div class="col-md-3 ">
+                      <mat-form-field>
+                        <mat-label>Event Category</mat-label>
+                        <input matInput  formControlName="title">
+
+                    </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <mat-dialog-actions align="end">
+                    <button mat-raised-button id="no-button" [mat-dialog-close]="false">
+                      Yes
+                  </button>
+                  <button mat-raised-button id="yes-button" color="primary" [mat-dialog-close]="true">
+                    No
+                  </button>
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </form>
+</div>
